@@ -2,17 +2,23 @@
 import subprocess, json, csv, os
 import sys
 
-MODULES = ["bench.original", "-m","bench.sourcery_refactor","bench.tabnine_refactor","bench.local_llm_refactor"]
+MODULES = [
+    "bench.original",
+    "bench.sourcery",
+    "bench.tabnine",
+    "bench.local_llm", # Add or remove any other modules you need to test
+]
 OUT = "results.csv"
 
 def run_module(mod):
-    p = subprocess.run([sys.executable,"bench/bench_runner.py", mod, "12", "2000"],
+    p = subprocess.run([sys.executable, "-m","bench.bench_runner", mod, "12", "2000"],
                        capture_output=True, text=True, check=True)
     return json.loads(p.stdout)
 
 def main():
     rows = []
     for m in MODULES:
+        print(f"Attempting to benchmark module: {m}")
         r = run_module(m)
         rows.append(r)
     # write CSV (mean,stdev,ci95)
