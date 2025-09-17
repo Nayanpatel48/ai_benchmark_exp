@@ -1,5 +1,5 @@
 # orchestrator: runs each candidate in a fresh python process and writes CSV
-import subprocess, json, csv, os
+import subprocess, json, csv
 import sys
 
 MODULES = [

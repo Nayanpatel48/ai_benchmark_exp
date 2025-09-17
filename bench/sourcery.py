@@ -1,6 +1,5 @@
 # refactor using dict mapping and comprehensions (expected faster)
 import random
-from collections import defaultdict
 
 def generate_data(n=2000):
     return [{"id": i, "value": random.randint(0, 100)} for i in range(n)]
